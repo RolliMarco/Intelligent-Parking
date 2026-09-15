@@ -1,0 +1,27 @@
+<edges>
+    <edge id="Zufahrt1" from="RU" to="MU" numLanes="2" speed="13.89"/>
+    <edge id="Abfahrt1" from="MU" to="RU" numLanes="2" speed="13.89"/>
+
+
+    <edge id="Zufahrt2" from="MU" to="LU" numLanes="2" speed="13.89"/>
+    <edge id="Abfahrt2" from="LU" to="MU" numLanes="2" speed="13.89"/>
+
+
+    <edge id="Zufahrt3" from="UU" to="MU" numLanes="2" speed="13.89"/>
+
+
+    <edge id="Zufahrt4" from="MO" to="MM" numLanes="2" speed="13.89"/>
+
+
+    <edge id="HochfahrtLinks" from="LU" to="LO" numLanes="2" speed="13.89"/>
+    <edge id="HochfahrtMitte" from="MU" to="MM" numLanes="2" speed="13.89"/>
+    <edge id="HochfahrtRechts" from="RM" to="RO" numLanes="2" speed="13.89"/>
+    <edge id="RunterfahrtLinks" from="LO" to="LU" numLanes="2" speed="13.89"/>
+    <edge id="RunterfahrttMitte" from="MM" to="MU" numLanes="2" speed="13.89"/>
+    <edge id="RunterRunter" from="MU" to="UU" numLanes="2" speed="13.89"/>
+    <edge id="RunterfahrtRechts" from="RO" to="RM" numLanes="2" speed="13.89"/>
+    <edge id="LinksLinks" from="MM" to="LM" numLanes="2" speed="13.89"/>
+    <edge id="LinksRechts" from="LM" to="MM" numLanes="2" speed="13.89"/>
+    <edge id="RechtsLinks" from="RM" to="MM" numLanes="2" speed="13.89"/>
+    <edge id="RechtsRechts" from="MM" to="RM" numLanes="2" speed="13.89"/>
+</edges>

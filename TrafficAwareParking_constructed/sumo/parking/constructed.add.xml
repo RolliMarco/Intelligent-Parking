@@ -1,0 +1,5 @@
+<additional>
+<parkingArea id="P1" lane="HochfahrtLinks_0" startPos="250" endPos="290" roadsideCapacity="40" name="Parkplatz 1"/>
+<parkingArea id="P2" lane="LinksLinks_0" startPos="100" endPos="120" roadsideCapacity="40" name="Parkplatz 2"/>
+<parkingArea id="P3" lane="HochfahrtRechts_0" startPos="200" endPos="240" roadsideCapacity="40" name="Parkplatz 3"/>
+</additional>

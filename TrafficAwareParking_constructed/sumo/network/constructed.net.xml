@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-09-14T15:44:08.563380+01:00 by Eclipse SUMO netconvert 1.27.1
+<netconvertConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <node-files value="constructed.nod.xml"/>
+        <edge-files value="constructed.edg.xml"/>
+    </input>
+
+    <output>
+        <output-file value="constructed.net.xml"/>
+    </output>
+
+</netconvertConfiguration>
+-->
+
+<net version="1.20" junctionCornerDetail="5" limitTurnSpeed="5.50" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
+
+    <location netOffset="0.00,300.00" convBoundary="0.00,0.00,600.00,900.00" origBoundary="0.00,-300.00,600.00,600.00" projParameter="!"/>
+
+    <edge id=":LM_0" function="internal">
+        <lane id=":LM_0_0" index="0" speed="3.65" length="4.67" shape="150.00,601.60 148.80,600.80 148.40,600.00 148.80,599.20 150.00,598.40"/>
+    </edge>
+    <edge id=":LO_0" function="internal">
+        <lane id=":LO_0_0" index="0" speed="3.65" length="4.67" shape="1.60,850.00 0.80,851.20 0.00,851.60 -0.80,851.20 -1.60,850.00"/>
+    </edge>
+    <edge id=":LU_0" function="internal">
+        <lane id=":LU_0_0" index="0" speed="8.96" length="18.06" shape="-4.80,306.40 -4.10,301.50 -2.00,298.00 1.50,295.90 6.40,295.20"/>
+        <lane id=":LU_0_1" index="1" speed="7.66" length="12.90" shape="-1.60,306.40 -1.10,302.90 0.40,300.40 2.90,298.90 6.40,298.40"/>
+    </edge>
+    <edge id=":LU_2" function="internal">
+        <lane id=":LU_2_0" index="0" speed="3.90" length="2.58" shape="6.40,304.80 5.70,304.90 5.20,305.20 4.90,305.70 4.80,306.40"/>
+        <lane id=":LU_2_1" index="1" speed="6.08" length="7.74" shape="6.40,301.60 4.30,301.90 2.80,302.80 1.90,304.30 1.60,306.40"/>
+    </edge>
+    <edge id=":MM_0" function="internal">
+        <lane id=":MM_0_0" index="0" speed="6.51" length="9.03" shape="295.20,610.40 294.85,607.95 293.80,606.20 292.05,605.15 289.60,604.80"/>
+    </edge>
+    <edge id=":MM_1" function="internal">
+        <lane id=":MM_1_0" index="0" speed="13.89" length="20.80" shape="295.20,610.40 295.20,589.60"/>
+        <lane id=":MM_1_1" index="1" speed="13.89" length="20.80" shape="298.40,610.40 298.40,589.60"/>
+    </edge>
+    <edge id=":MM_3" function="internal">
+        <lane id=":MM_3_0" index="0" speed="9.26" length="14.65" shape="298.40,610.40 299.15,605.15 301.40,601.40 305.15,599.15 305.74,599.07"/>
+    </edge>
+    <edge id=":MM_16" function="internal">
+        <lane id=":MM_16_0" index="0" speed="9.26" length="4.70" shape="305.74,599.07 310.40,598.40"/>
+    </edge>
+    <edge id=":MM_4" function="internal">
+        <lane id=":MM_4_0" index="0" speed="13.89" length="20.80" shape="310.40,604.80 289.60,604.80"/>
+        <lane id=":MM_4_1" index="1" speed="13.89" length="20.80" shape="310.40,601.60 289.60,601.60"/>
+    </edge>
+    <edge id=":MM_6" function="internal">
+        <lane id=":MM_6_0" index="0" speed="9.26" length="19.35" shape="310.40,601.60 305.15,600.85 301.40,598.60 299.15,594.85 298.40,589.60"/>
+    </edge>
+    <edge id=":MM_7" function="internal">
+        <lane id=":MM_7_0" index="0" speed="3.65" length="4.67" shape="310.40,601.60 309.20,600.80 308.80,600.00 309.20,599.20 310.40,598.40"/>
+    </edge>
+    <edge id=":MM_8" function="internal">
+        <lane id=":MM_8_0" index="0" speed="6.51" length="9.03" shape="304.80,589.60 305.15,592.05 306.20,593.80 307.95,594.85 310.40,595.20"/>
+        <lane id=":MM_8_1" index="1" speed="8.00" length="14.19" shape="301.60,589.60 302.15,593.45 303.80,596.20 306.55,597.85 310.40,598.40"/>
+    </edge>
+    <edge id=":MM_10" function="internal">
+        <lane id=":MM_10_0" index="0" speed="9.26" length="5.01" shape="301.60,589.60 300.89,594.56"/>
+    </edge>
+    <edge id=":MM_11" function="internal">
+        <lane id=":MM_11_0" index="0" speed="3.65" length="1.44" shape="301.60,589.60 300.80,590.80"/>
+    </edge>
+    <edge id=":MM_17" function="internal">
+        <lane id=":MM_17_0" index="0" speed="9.26" length="14.34" shape="300.89,594.56 300.85,594.85 298.60,598.60 294.85,600.85 289.60,601.60"/>
+    </edge>
+    <edge id=":MM_18" function="internal">
+        <lane id=":MM_18_0" index="0" speed="3.65" length="3.23" shape="300.80,590.80 300.00,591.20 299.20,590.80 298.40,589.60"/>
+    </edge>
+    <edge id=":MM_12" function="internal">
+        <lane id=":MM_12_0" index="0" speed="6.51" length="9.03" shape="289.60,595.20 292.05,594.85 293.80,593.80 294.85,592.05 295.20,589.60"/>
+    </edge>
+    <edge id=":MM_13" function="internal">
+        <lane id=":MM_13_0" index="0" speed="13.89" length="20.80" shape="289.60,595.20 310.40,595.20"/>
+        <lane id=":MM_13_1" index="1" speed="13.89" length="20.80" shape="289.60,598.40 310.40,598.40"/>
+    </edge>
+    <edge id=":MM_15" function="internal">
+        <lane id=":MM_15_0" index="0" speed="3.65" length="4.67" shape="289.60,598.40 290.80,599.20 291.20,600.00 290.80,600.80 289.60,601.60"/>
+    </edge>
+    <edge id=":MU_0" function="internal">
+        <lane id=":MU_0_0" index="0" speed="6.51" length="9.03" shape="295.20,310.40 294.85,307.95 293.80,306.20 292.05,305.15 289.60,304.80"/>
+    </edge>
+    <edge id=":MU_1" function="internal">
+        <lane id=":MU_1_0" index="0" speed="13.89" length="20.80" shape="295.20,310.40 295.20,289.60"/>
+        <lane id=":MU_1_1" index="1" speed="13.89" length="20.80" shape="298.40,310.40 298.40,289.60"/>
+    </edge>
+    <edge id=":MU_3" function="internal">
+        <lane id=":MU_3_0" index="0" speed="9.26" length="5.01" shape="298.40,310.40 299.11,305.44"/>
+    </edge>
+    <edge id=":MU_4" function="internal">
+        <lane id=":MU_4_0" index="0" speed="3.65" length="1.44" shape="298.40,310.40 299.20,309.20"/>
+    </edge>
+    <edge id=":MU_20" function="internal">
+        <lane id=":MU_20_0" index="0" speed="9.26" length="14.34" shape="299.11,305.44 299.15,305.15 301.40,301.40 305.15,299.15 310.40,298.40"/>
+    </edge>
+    <edge id=":MU_21" function="internal">
+        <lane id=":MU_21_0" index="0" speed="3.65" length="3.23" shape="299.20,309.20 300.00,308.80 300.80,309.20 301.60,310.40"/>
+    </edge>
+    <edge id=":MU_5" function="internal">
+        <lane id=":MU_5_0" index="0" speed="6.51" length="9.03" shape="310.40,304.80 307.95,305.15 306.20,306.20 305.15,307.95 304.80,310.40"/>
+    </edge>
+    <edge id=":MU_6" function="internal">
+        <lane id=":MU_6_0" index="0" speed="13.89" length="20.80" shape="310.40,304.80 289.60,304.80"/>
+        <lane id=":MU_6_1" index="1" speed="13.89" length="20.80" shape="310.40,301.60 289.60,301.60"/>
+    </edge>
+    <edge id=":MU_8" function="internal">
+        <lane id=":MU_8_0" index="0" speed="9.26" length="19.35" shape="310.40,301.60 305.15,300.85 301.40,298.60 299.15,294.85 298.40,289.60"/>
+    </edge>
+    <edge id=":MU_9" function="internal">
+        <lane id=":MU_9_0" index="0" speed="3.65" length="4.67" shape="310.40,301.60 309.20,300.80 308.80,300.00 309.20,299.20 310.40,298.40"/>
+    </edge>
+    <edge id=":MU_10" function="internal">
+        <lane id=":MU_10_0" index="0" speed="6.51" length="9.03" shape="304.80,289.60 305.15,292.05 306.20,293.80 307.95,294.85 310.40,295.20"/>
+    </edge>
+    <edge id=":MU_11" function="internal">
+        <lane id=":MU_11_0" index="0" speed="13.89" length="20.80" shape="304.80,289.60 304.80,310.40"/>
+        <lane id=":MU_11_1" index="1" speed="13.89" length="20.80" shape="301.60,289.60 301.60,310.40"/>
+    </edge>
+    <edge id=":MU_13" function="internal">
+        <lane id=":MU_13_0" index="0" speed="9.26" length="5.01" shape="301.60,289.60 300.89,294.56"/>
+    </edge>
+    <edge id=":MU_14" function="internal">
+        <lane id=":MU_14_0" index="0" speed="3.65" length="1.44" shape="301.60,289.60 300.80,290.80"/>
+    </edge>
+    <edge id=":MU_22" function="internal">
+        <lane id=":MU_22_0" index="0" speed="9.26" length="14.34" shape="300.89,294.56 300.85,294.85 298.60,298.60 294.85,300.85 289.60,301.60"/>
+    </edge>
+    <edge id=":MU_23" function="internal">
+        <lane id=":MU_23_0" index="0" speed="3.65" length="3.23" shape="300.80,290.80 300.00,291.20 299.20,290.80 298.40,289.60"/>
+    </edge>
+    <edge id=":MU_15" function="internal">
+        <lane id=":MU_15_0" index="0" speed="6.51" length="9.03" shape="289.60,295.20 292.05,294.85 293.80,293.80 294.85,292.05 295.20,289.60"/>
+    </edge>
+    <edge id=":MU_16" function="internal">
+        <lane id=":MU_16_0" index="0" speed="13.89" length="20.80" shape="289.60,295.20 310.40,295.20"/>
+        <lane id=":MU_16_1" index="1" speed="13.89" length="20.80" shape="289.60,298.40 310.40,298.40"/>
+    </edge>
+    <edge id=":MU_18" function="internal">
+        <lane id=":MU_18_0" index="0" speed="9.26" length="19.35" shape="289.60,298.40 294.85,299.15 298.60,301.40 300.85,305.15 301.60,310.40"/>
+    </edge>
+    <edge id=":MU_19" function="internal">
+        <lane id=":MU_19_0" index="0" speed="3.65" length="4.67" shape="289.60,298.40 290.80,299.20 291.20,300.00 290.80,300.80 289.60,301.60"/>
+    </edge>
+    <edge id=":RM_0" function="internal">
+        <lane id=":RM_0_0" index="0" speed="3.90" length="2.58" shape="595.20,606.40 595.10,605.70 594.80,605.20 594.30,604.90 593.60,604.80"/>
+        <lane id=":RM_0_1" index="1" speed="6.08" length="7.74" shape="598.40,606.40 598.10,604.30 597.20,602.80 595.70,601.90 593.60,601.60"/>
+    </edge>
+    <edge id=":RM_2" function="internal">
+        <lane id=":RM_2_0" index="0" speed="8.96" length="18.06" shape="593.60,595.20 598.50,595.90 602.00,598.00 604.10,601.50 604.80,606.40"/>
+        <lane id=":RM_2_1" index="1" speed="7.66" length="12.90" shape="593.60,598.40 597.10,598.90 599.60,600.40 601.10,602.90 601.60,606.40"/>
+    </edge>
+    <edge id=":RO_0" function="internal">
+        <lane id=":RO_0_0" index="0" speed="3.65" length="4.67" shape="601.60,850.00 600.80,851.20 600.00,851.60 599.20,851.20 598.40,850.00"/>
+    </edge>
+    <edge id=":RU_0" function="internal">
+        <lane id=":RU_0_0" index="0" speed="3.65" length="4.67" shape="600.00,298.40 601.20,299.20 601.60,300.00 601.20,300.80 600.00,301.60"/>
+    </edge>
+    <edge id=":UU_0" function="internal">
+        <lane id=":UU_0_0" index="0" speed="3.65" length="4.67" shape="298.40,0.00 299.20,-1.20 300.00,-1.60 300.80,-1.20 301.60,0.00"/>
+    </edge>
+
+    <edge id="Abfahrt1" from="MU" to="RU" priority="-1">
+        <lane id="Abfahrt1_0" index="0" speed="13.89" length="289.60" shape="310.40,295.20 600.00,295.20"/>
+        <lane id="Abfahrt1_1" index="1" speed="13.89" length="289.60" shape="310.40,298.40 600.00,298.40"/>
+    </edge>
+    <edge id="Abfahrt2" from="LU" to="MU" priority="-1">
+        <lane id="Abfahrt2_0" index="0" speed="13.89" length="283.20" shape="6.40,295.20 289.60,295.20"/>
+        <lane id="Abfahrt2_1" index="1" speed="13.89" length="283.20" shape="6.40,298.40 289.60,298.40"/>
+    </edge>
+    <edge id="HochfahrtLinks" from="LU" to="LO" priority="-1">
+        <lane id="HochfahrtLinks_0" index="0" speed="13.89" length="543.60" shape="4.80,306.40 4.80,850.00"/>
+        <lane id="HochfahrtLinks_1" index="1" speed="13.89" length="543.60" shape="1.60,306.40 1.60,850.00"/>
+    </edge>
+    <edge id="HochfahrtMitte" from="MU" to="MM" priority="-1">
+        <lane id="HochfahrtMitte_0" index="0" speed="13.89" length="279.20" shape="304.80,310.40 304.80,589.60"/>
+        <lane id="HochfahrtMitte_1" index="1" speed="13.89" length="279.20" shape="301.60,310.40 301.60,589.60"/>
+    </edge>
+    <edge id="HochfahrtRechts" from="RM" to="RO" priority="-1">
+        <lane id="HochfahrtRechts_0" index="0" speed="13.89" length="243.60" shape="604.80,606.40 604.80,850.00"/>
+        <lane id="HochfahrtRechts_1" index="1" speed="13.89" length="243.60" shape="601.60,606.40 601.60,850.00"/>
+    </edge>
+    <edge id="LinksLinks" from="MM" to="LM" priority="-1">
+        <lane id="LinksLinks_0" index="0" speed="13.89" length="139.60" shape="289.60,604.80 150.00,604.80"/>
+        <lane id="LinksLinks_1" index="1" speed="13.89" length="139.60" shape="289.60,601.60 150.00,601.60"/>
+    </edge>
+    <edge id="LinksRechts" from="LM" to="MM" priority="-1">
+        <lane id="LinksRechts_0" index="0" speed="13.89" length="139.60" shape="150.00,595.20 289.60,595.20"/>
+        <lane id="LinksRechts_1" index="1" speed="13.89" length="139.60" shape="150.00,598.40 289.60,598.40"/>
+    </edge>
+    <edge id="RechtsLinks" from="RM" to="MM" priority="-1">
+        <lane id="RechtsLinks_0" index="0" speed="13.89" length="283.20" shape="593.60,604.80 310.40,604.80"/>
+        <lane id="RechtsLinks_1" index="1" speed="13.89" length="283.20" shape="593.60,601.60 310.40,601.60"/>
+    </edge>
+    <edge id="RechtsRechts" from="MM" to="RM" priority="-1">
+        <lane id="RechtsRechts_0" index="0" speed="13.89" length="283.20" shape="310.40,595.20 593.60,595.20"/>
+        <lane id="RechtsRechts_1" index="1" speed="13.89" length="283.20" shape="310.40,598.40 593.60,598.40"/>
+    </edge>
+    <edge id="RunterRunter" from="MU" to="UU" priority="-1">
+        <lane id="RunterRunter_0" index="0" speed="13.89" length="289.60" shape="295.20,289.60 295.20,0.00"/>
+        <lane id="RunterRunter_1" index="1" speed="13.89" length="289.60" shape="298.40,289.60 298.40,0.00"/>
+    </edge>
+    <edge id="RunterfahrtLinks" from="LO" to="LU" priority="-1">
+        <lane id="RunterfahrtLinks_0" index="0" speed="13.89" length="543.60" shape="-4.80,850.00 -4.80,306.40"/>
+        <lane id="RunterfahrtLinks_1" index="1" speed="13.89" length="543.60" shape="-1.60,850.00 -1.60,306.40"/>
+    </edge>
+    <edge id="RunterfahrtRechts" from="RO" to="RM" priority="-1">
+        <lane id="RunterfahrtRechts_0" index="0" speed="13.89" length="243.60" shape="595.20,850.00 595.20,606.40"/>
+        <lane id="RunterfahrtRechts_1" index="1" speed="13.89" length="243.60" shape="598.40,850.00 598.40,606.40"/>
+    </edge>
+    <edge id="RunterfahrttMitte" from="MM" to="MU" priority="-1">
+        <lane id="RunterfahrttMitte_0" index="0" speed="13.89" length="279.20" shape="295.20,589.60 295.20,310.40"/>
+        <lane id="RunterfahrttMitte_1" index="1" speed="13.89" length="279.20" shape="298.40,589.60 298.40,310.40"/>
+    </edge>
+    <edge id="Zufahrt1" from="RU" to="MU" priority="-1">
+        <lane id="Zufahrt1_0" index="0" speed="13.89" length="289.60" shape="600.00,304.80 310.40,304.80"/>
+        <lane id="Zufahrt1_1" index="1" speed="13.89" length="289.60" shape="600.00,301.60 310.40,301.60"/>
+    </edge>
+    <edge id="Zufahrt2" from="MU" to="LU" priority="-1">
+        <lane id="Zufahrt2_0" index="0" speed="13.89" length="283.20" shape="289.60,304.80 6.40,304.80"/>
+        <lane id="Zufahrt2_1" index="1" speed="13.89" length="283.20" shape="289.60,301.60 6.40,301.60"/>
+    </edge>
+    <edge id="Zufahrt3" from="UU" to="MU" priority="-1">
+        <lane id="Zufahrt3_0" index="0" speed="13.89" length="289.60" shape="304.80,0.00 304.80,289.60"/>
+        <lane id="Zufahrt3_1" index="1" speed="13.89" length="289.60" shape="301.60,0.00 301.60,289.60"/>
+    </edge>
+    <edge id="Zufahrt4" from="MO" to="MM" priority="-1">
+        <lane id="Zufahrt4_0" index="0" speed="13.89" length="289.60" shape="295.20,900.00 295.20,610.40"/>
+        <lane id="Zufahrt4_1" index="1" speed="13.89" length="289.60" shape="298.40,900.00 298.40,610.40"/>
+    </edge>
+
+    <junction id="LM" type="priority" x="150.00" y="600.00" incLanes="LinksLinks_0 LinksLinks_1" intLanes=":LM_0_0" shape="150.00,600.00 150.00,606.40 150.00,600.00">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+    <junction id="LO" type="priority" x="0.00" y="850.00" incLanes="HochfahrtLinks_0 HochfahrtLinks_1" intLanes=":LO_0_0" shape="0.00,850.00 6.40,850.00 0.00,850.00">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+    <junction id="LU" type="priority" x="0.00" y="300.00" incLanes="RunterfahrtLinks_0 RunterfahrtLinks_1 Zufahrt2_0 Zufahrt2_1" intLanes=":LU_0_0 :LU_0_1 :LU_2_0 :LU_2_1" shape="-6.40,306.40 6.40,306.40 6.40,293.60 2.49,293.96 -0.71,295.02 -3.20,296.80 -4.98,299.29 -6.04,302.49">
+        <request index="0" response="0000" foes="0000" cont="0"/>
+        <request index="1" response="0000" foes="0000" cont="0"/>
+        <request index="2" response="0000" foes="0000" cont="0"/>
+        <request index="3" response="0000" foes="0000" cont="0"/>
+    </junction>
+    <junction id="MM" type="priority" x="300.00" y="600.00" incLanes="Zufahrt4_0 Zufahrt4_1 RechtsLinks_0 RechtsLinks_1 HochfahrtMitte_0 HochfahrtMitte_1 LinksRechts_0 LinksRechts_1" intLanes=":MM_0_0 :MM_1_0 :MM_1_1 :MM_16_0 :MM_4_0 :MM_4_1 :MM_6_0 :MM_7_0 :MM_8_0 :MM_8_1 :MM_17_0 :MM_18_0 :MM_12_0 :MM_13_0 :MM_13_1 :MM_15_0" shape="293.60,610.40 300.00,610.40 301.16,608.18 302.60,607.40 304.62,606.84 307.22,606.51 310.40,606.40 310.40,593.60 308.18,593.16 307.40,592.60 306.84,591.82 306.51,590.82 306.40,589.60 293.60,589.60 293.16,591.82 292.60,592.60 291.82,593.16 290.82,593.49 289.60,593.60 289.60,606.40 291.82,606.84 292.60,607.40 293.16,608.18 293.49,609.18">
+        <request index="0"  response="0000000000000000" foes="0000000000110000" cont="0"/>
+        <request index="1"  response="0000000000000000" foes="0111110001110000" cont="0"/>
+        <request index="2"  response="0000000000000000" foes="0111110001110000" cont="0"/>
+        <request index="3"  response="0000001100000000" foes="0110001111110000" cont="1"/>
+        <request index="4"  response="0000010000001111" foes="1000010000001111" cont="0"/>
+        <request index="5"  response="0000010000001111" foes="1000010000001111" cont="0"/>
+        <request index="6"  response="0110010000001110" foes="0110110000001110" cont="0"/>
+        <request index="7"  response="0110001100001000" foes="0110001100001000" cont="0"/>
+        <request index="8"  response="0000000000000000" foes="0110000010001000" cont="0"/>
+        <request index="9"  response="0000000000000000" foes="0110000010001000" cont="0"/>
+        <request index="10" response="0000000000000110" foes="1110000001110110" cont="1"/>
+        <request index="11" response="0000000001000110" foes="0000000001000110" cont="1"/>
+        <request index="12" response="0000000000000110" foes="0000000000000110" cont="0"/>
+        <request index="13" response="0000011100001110" foes="0000011111001110" cont="0"/>
+        <request index="14" response="0000011100001110" foes="0000011111001110" cont="0"/>
+        <request index="15" response="0000010000110000" foes="0000010000110000" cont="0"/>
+    </junction>
+    <junction id="MO" type="dead_end" x="300.00" y="900.00" incLanes="" intLanes="" shape="300.00,900.00 293.60,900.00"/>
+    <junction id="MU" type="priority" x="300.00" y="300.00" incLanes="RunterfahrttMitte_0 RunterfahrttMitte_1 Zufahrt1_0 Zufahrt1_1 Zufahrt3_0 Zufahrt3_1 Abfahrt2_0 Abfahrt2_1" intLanes=":MU_0_0 :MU_1_0 :MU_1_1 :MU_20_0 :MU_21_0 :MU_5_0 :MU_6_0 :MU_6_1 :MU_8_0 :MU_9_0 :MU_10_0 :MU_11_0 :MU_11_1 :MU_22_0 :MU_23_0 :MU_15_0 :MU_16_0 :MU_16_1 :MU_18_0 :MU_19_0" shape="293.60,310.40 306.40,310.40 306.84,308.18 307.40,307.40 308.18,306.84 309.18,306.51 310.40,306.40 310.40,293.60 308.18,293.16 307.40,292.60 306.84,291.82 306.51,290.82 306.40,289.60 293.60,289.60 293.16,291.82 292.60,292.60 291.82,293.16 290.82,293.49 289.60,293.60 289.60,306.40 291.82,306.84 292.60,307.40 293.16,308.18 293.49,309.18">
+        <request index="0"  response="00000000000000000000" foes="00000000000011000000" cont="0"/>
+        <request index="1"  response="00000000000000000000" foes="01111110000111000000" cont="0"/>
+        <request index="2"  response="00000000000000000000" foes="01111110000111000000" cont="0"/>
+        <request index="3"  response="00000001100000000000" foes="01110001101111000000" cont="1"/>
+        <request index="4"  response="01000001100000000000" foes="01000001100000000000" cont="1"/>
+        <request index="5"  response="00000001100000000000" foes="00000001100000000000" cont="0"/>
+        <request index="6"  response="00000011100000001111" foes="11000011100000001111" cont="0"/>
+        <request index="7"  response="00000011100000001111" foes="11000011100000001111" cont="0"/>
+        <request index="8"  response="00110011100000001110" foes="00110111100000001110" cont="0"/>
+        <request index="9"  response="00110000000000001000" foes="00110000000000001000" cont="0"/>
+        <request index="10" response="00000000000000000000" foes="00110000000000000000" cont="0"/>
+        <request index="11" response="00000000000000000000" foes="01110000000111111000" cont="0"/>
+        <request index="12" response="00000000000000000000" foes="01110000000111111000" cont="0"/>
+        <request index="13" response="00000000000000000110" foes="11110000000111000110" cont="1"/>
+        <request index="14" response="00000000000100000110" foes="00000000000100000110" cont="1"/>
+        <request index="15" response="00000000000000000110" foes="00000000000000000110" cont="0"/>
+        <request index="16" response="00000011110000001110" foes="00000011111100001110" cont="0"/>
+        <request index="17" response="00000011110000001110" foes="00000011111100001110" cont="0"/>
+        <request index="18" response="00000011100011001110" foes="00000011100011011110" cont="0"/>
+        <request index="19" response="00000010000011000000" foes="00000010000011000000" cont="0"/>
+    </junction>
+    <junction id="RM" type="priority" x="600.00" y="600.00" incLanes="RunterfahrtRechts_0 RunterfahrtRechts_1 RechtsRechts_0 RechtsRechts_1" intLanes=":RM_0_0 :RM_0_1 :RM_2_0 :RM_2_1" shape="593.60,606.40 606.40,606.40 606.04,602.49 604.98,599.29 603.20,596.80 600.71,595.02 597.51,593.96 593.60,593.60">
+        <request index="0" response="0000" foes="0000" cont="0"/>
+        <request index="1" response="0000" foes="0000" cont="0"/>
+        <request index="2" response="0000" foes="0000" cont="0"/>
+        <request index="3" response="0000" foes="0000" cont="0"/>
+    </junction>
+    <junction id="RO" type="priority" x="600.00" y="850.00" incLanes="HochfahrtRechts_0 HochfahrtRechts_1" intLanes=":RO_0_0" shape="600.00,850.00 606.40,850.00 600.00,850.00">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+    <junction id="RU" type="priority" x="600.00" y="300.00" incLanes="Abfahrt1_0 Abfahrt1_1" intLanes=":RU_0_0" shape="600.00,300.00 600.00,293.60 600.00,300.00">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+    <junction id="UU" type="priority" x="300.00" y="0.00" incLanes="RunterRunter_0 RunterRunter_1" intLanes=":UU_0_0" shape="300.00,0.00 293.60,0.00 300.00,0.00">
+        <request index="0" response="0" foes="0" cont="0"/>
+    </junction>
+
+    <junction id=":MM_16_0" type="internal" x="305.74" y="599.07" incLanes=":MM_3_0 HochfahrtMitte_0 HochfahrtMitte_1" intLanes=":MM_4_0 :MM_4_1 :MM_6_0 :MM_7_0 :MM_8_0 :MM_8_1 :MM_13_0 :MM_13_1"/>
+    <junction id=":MM_17_0" type="internal" x="300.89" y="594.56" incLanes=":MM_10_0 Zufahrt4_0 Zufahrt4_1" intLanes=":MM_0_0 :MM_1_0 :MM_1_1 :MM_4_0 :MM_4_1 :MM_6_0 :MM_13_0 :MM_13_1 :MM_15_0"/>
+    <junction id=":MM_18_0" type="internal" x="300.80" y="590.80" incLanes=":MM_11_0 LinksRechts_0 RechtsLinks_1 Zufahrt4_0 Zufahrt4_1" intLanes=":MM_1_0 :MM_1_1 :MM_6_0 :MM_12_0"/>
+    <junction id=":MU_20_0" type="internal" x="299.11" y="305.44" incLanes=":MU_3_0 Zufahrt3_0 Zufahrt3_1" intLanes=":MU_6_0 :MU_6_1 :MU_8_0 :MU_9_0 :MU_10_0 :MU_11_0 :MU_11_1 :MU_16_0 :MU_16_1 :MU_18_0"/>
+    <junction id=":MU_21_0" type="internal" x="299.20" y="309.20" incLanes=":MU_4_0 Abfahrt2_1 Zufahrt1_0 Zufahrt3_0 Zufahrt3_1" intLanes=":MU_5_0 :MU_11_0 :MU_11_1 :MU_18_0"/>
+    <junction id=":MU_22_0" type="internal" x="300.89" y="294.56" incLanes=":MU_13_0 RunterfahrttMitte_0 RunterfahrttMitte_1" intLanes=":MU_0_0 :MU_1_0 :MU_1_1 :MU_6_0 :MU_6_1 :MU_8_0 :MU_16_0 :MU_16_1 :MU_18_0 :MU_19_0"/>
+    <junction id=":MU_23_0" type="internal" x="300.80" y="290.80" incLanes=":MU_14_0 Abfahrt2_0 RunterfahrttMitte_0 RunterfahrttMitte_1 Zufahrt1_1" intLanes=":MU_1_0 :MU_1_1 :MU_8_0 :MU_15_0"/>
+
+    <connection from="Abfahrt1" to="Zufahrt1" fromLane="1" toLane="1" via=":RU_0_0" dir="t" state="M"/>
+    <connection from="Abfahrt2" to="RunterRunter" fromLane="0" toLane="0" via=":MU_15_0" dir="r" state="m"/>
+    <connection from="Abfahrt2" to="Abfahrt1" fromLane="0" toLane="0" via=":MU_16_0" dir="s" state="m"/>
+    <connection from="Abfahrt2" to="Abfahrt1" fromLane="1" toLane="1" via=":MU_16_1" dir="s" state="m"/>
+    <connection from="Abfahrt2" to="HochfahrtMitte" fromLane="1" toLane="1" via=":MU_18_0" dir="l" state="m"/>
+    <connection from="Abfahrt2" to="Zufahrt2" fromLane="1" toLane="1" via=":MU_19_0" dir="t" state="m"/>
+    <connection from="HochfahrtLinks" to="RunterfahrtLinks" fromLane="1" toLane="1" via=":LO_0_0" dir="t" state="M"/>
+    <connection from="HochfahrtMitte" to="RechtsRechts" fromLane="0" toLane="0" via=":MM_8_0" dir="r" state="M"/>
+    <connection from="HochfahrtMitte" to="RechtsRechts" fromLane="1" toLane="1" via=":MM_8_1" dir="r" state="M"/>
+    <connection from="HochfahrtMitte" to="LinksLinks" fromLane="1" toLane="1" via=":MM_10_0" dir="l" state="m"/>
+    <connection from="HochfahrtMitte" to="RunterfahrttMitte" fromLane="1" toLane="1" via=":MM_11_0" dir="t" state="m"/>
+    <connection from="HochfahrtRechts" to="RunterfahrtRechts" fromLane="1" toLane="1" via=":RO_0_0" dir="t" state="M"/>
+    <connection from="LinksLinks" to="LinksRechts" fromLane="1" toLane="1" via=":LM_0_0" dir="t" state="M"/>
+    <connection from="LinksRechts" to="RunterfahrttMitte" fromLane="0" toLane="0" via=":MM_12_0" dir="r" state="m"/>
+    <connection from="LinksRechts" to="RechtsRechts" fromLane="0" toLane="0" via=":MM_13_0" dir="s" state="m"/>
+    <connection from="LinksRechts" to="RechtsRechts" fromLane="1" toLane="1" via=":MM_13_1" dir="s" state="m"/>
+    <connection from="LinksRechts" to="LinksLinks" fromLane="1" toLane="1" via=":MM_15_0" dir="t" state="m"/>
+    <connection from="RechtsLinks" to="LinksLinks" fromLane="0" toLane="0" via=":MM_4_0" dir="s" state="m"/>
+    <connection from="RechtsLinks" to="LinksLinks" fromLane="1" toLane="1" via=":MM_4_1" dir="s" state="m"/>
+    <connection from="RechtsLinks" to="RunterfahrttMitte" fromLane="1" toLane="1" via=":MM_6_0" dir="l" state="m"/>
+    <connection from="RechtsLinks" to="RechtsRechts" fromLane="1" toLane="1" via=":MM_7_0" dir="t" state="m"/>
+    <connection from="RechtsRechts" to="HochfahrtRechts" fromLane="0" toLane="0" via=":RM_2_0" dir="l" state="M"/>
+    <connection from="RechtsRechts" to="HochfahrtRechts" fromLane="1" toLane="1" via=":RM_2_1" dir="l" state="M"/>
+    <connection from="RunterRunter" to="Zufahrt3" fromLane="1" toLane="1" via=":UU_0_0" dir="t" state="M"/>
+    <connection from="RunterfahrtLinks" to="Abfahrt2" fromLane="0" toLane="0" via=":LU_0_0" dir="l" state="M"/>
+    <connection from="RunterfahrtLinks" to="Abfahrt2" fromLane="1" toLane="1" via=":LU_0_1" dir="l" state="M"/>
+    <connection from="RunterfahrtRechts" to="RechtsLinks" fromLane="0" toLane="0" via=":RM_0_0" dir="r" state="M"/>
+    <connection from="RunterfahrtRechts" to="RechtsLinks" fromLane="1" toLane="1" via=":RM_0_1" dir="r" state="M"/>
+    <connection from="RunterfahrttMitte" to="Zufahrt2" fromLane="0" toLane="0" via=":MU_0_0" dir="r" state="M"/>
+    <connection from="RunterfahrttMitte" to="RunterRunter" fromLane="0" toLane="0" via=":MU_1_0" dir="s" state="M"/>
+    <connection from="RunterfahrttMitte" to="RunterRunter" fromLane="1" toLane="1" via=":MU_1_1" dir="s" state="M"/>
+    <connection from="RunterfahrttMitte" to="Abfahrt1" fromLane="1" toLane="1" via=":MU_3_0" dir="l" state="m"/>
+    <connection from="RunterfahrttMitte" to="HochfahrtMitte" fromLane="1" toLane="1" via=":MU_4_0" dir="t" state="m"/>
+    <connection from="Zufahrt1" to="HochfahrtMitte" fromLane="0" toLane="0" via=":MU_5_0" dir="r" state="m"/>
+    <connection from="Zufahrt1" to="Zufahrt2" fromLane="0" toLane="0" via=":MU_6_0" dir="s" state="m"/>
+    <connection from="Zufahrt1" to="Zufahrt2" fromLane="1" toLane="1" via=":MU_6_1" dir="s" state="m"/>
+    <connection from="Zufahrt1" to="RunterRunter" fromLane="1" toLane="1" via=":MU_8_0" dir="l" state="m"/>
+    <connection from="Zufahrt1" to="Abfahrt1" fromLane="1" toLane="1" via=":MU_9_0" dir="t" state="m"/>
+    <connection from="Zufahrt2" to="HochfahrtLinks" fromLane="0" toLane="0" via=":LU_2_0" dir="r" state="M"/>
+    <connection from="Zufahrt2" to="HochfahrtLinks" fromLane="1" toLane="1" via=":LU_2_1" dir="r" state="M"/>
+    <connection from="Zufahrt3" to="Abfahrt1" fromLane="0" toLane="0" via=":MU_10_0" dir="r" state="M"/>
+    <connection from="Zufahrt3" to="HochfahrtMitte" fromLane="0" toLane="0" via=":MU_11_0" dir="s" state="M"/>
+    <connection from="Zufahrt3" to="HochfahrtMitte" fromLane="1" toLane="1" via=":MU_11_1" dir="s" state="M"/>
+    <connection from="Zufahrt3" to="Zufahrt2" fromLane="1" toLane="1" via=":MU_13_0" dir="l" state="m"/>
+    <connection from="Zufahrt3" to="RunterRunter" fromLane="1" toLane="1" via=":MU_14_0" dir="t" state="m"/>
+    <connection from="Zufahrt4" to="LinksLinks" fromLane="0" toLane="0" via=":MM_0_0" dir="r" state="M"/>
+    <connection from="Zufahrt4" to="RunterfahrttMitte" fromLane="0" toLane="0" via=":MM_1_0" dir="s" state="M"/>
+    <connection from="Zufahrt4" to="RunterfahrttMitte" fromLane="1" toLane="1" via=":MM_1_1" dir="s" state="M"/>
+    <connection from="Zufahrt4" to="RechtsRechts" fromLane="1" toLane="1" via=":MM_3_0" dir="l" state="m"/>
+
+    <connection from=":LM_0" to="LinksRechts" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":LO_0" to="RunterfahrtLinks" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":LU_0" to="Abfahrt2" fromLane="0" toLane="0" dir="l" state="M"/>
+    <connection from=":LU_0" to="Abfahrt2" fromLane="1" toLane="1" dir="l" state="M"/>
+    <connection from=":LU_2" to="HochfahrtLinks" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":LU_2" to="HochfahrtLinks" fromLane="1" toLane="1" dir="r" state="M"/>
+    <connection from=":MM_0" to="LinksLinks" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":MM_1" to="RunterfahrttMitte" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":MM_1" to="RunterfahrttMitte" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":MM_3" to="RechtsRechts" fromLane="0" toLane="1" via=":MM_16_0" dir="l" state="m"/>
+    <connection from=":MM_16" to="RechtsRechts" fromLane="0" toLane="1" dir="l" state="M"/>
+    <connection from=":MM_4" to="LinksLinks" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":MM_4" to="LinksLinks" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":MM_6" to="RunterfahrttMitte" fromLane="0" toLane="1" dir="l" state="M"/>
+    <connection from=":MM_7" to="RechtsRechts" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":MM_8" to="RechtsRechts" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":MM_8" to="RechtsRechts" fromLane="1" toLane="1" dir="r" state="M"/>
+    <connection from=":MM_10" to="LinksLinks" fromLane="0" toLane="1" via=":MM_17_0" dir="l" state="m"/>
+    <connection from=":MM_17" to="LinksLinks" fromLane="0" toLane="1" dir="l" state="M"/>
+    <connection from=":MM_11" to="RunterfahrttMitte" fromLane="0" toLane="1" via=":MM_18_0" dir="t" state="m"/>
+    <connection from=":MM_18" to="RunterfahrttMitte" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":MM_12" to="RunterfahrttMitte" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":MM_13" to="RechtsRechts" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":MM_13" to="RechtsRechts" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":MM_15" to="LinksLinks" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":MU_0" to="Zufahrt2" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":MU_1" to="RunterRunter" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":MU_1" to="RunterRunter" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":MU_3" to="Abfahrt1" fromLane="0" toLane="1" via=":MU_20_0" dir="l" state="m"/>
+    <connection from=":MU_20" to="Abfahrt1" fromLane="0" toLane="1" dir="l" state="M"/>
+    <connection from=":MU_4" to="HochfahrtMitte" fromLane="0" toLane="1" via=":MU_21_0" dir="t" state="m"/>
+    <connection from=":MU_21" to="HochfahrtMitte" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":MU_5" to="HochfahrtMitte" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":MU_6" to="Zufahrt2" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":MU_6" to="Zufahrt2" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":MU_8" to="RunterRunter" fromLane="0" toLane="1" dir="l" state="M"/>
+    <connection from=":MU_9" to="Abfahrt1" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":MU_10" to="Abfahrt1" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":MU_11" to="HochfahrtMitte" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":MU_11" to="HochfahrtMitte" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":MU_13" to="Zufahrt2" fromLane="0" toLane="1" via=":MU_22_0" dir="l" state="m"/>
+    <connection from=":MU_22" to="Zufahrt2" fromLane="0" toLane="1" dir="l" state="M"/>
+    <connection from=":MU_14" to="RunterRunter" fromLane="0" toLane="1" via=":MU_23_0" dir="t" state="m"/>
+    <connection from=":MU_23" to="RunterRunter" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":MU_15" to="RunterRunter" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":MU_16" to="Abfahrt1" fromLane="0" toLane="0" dir="s" state="M"/>
+    <connection from=":MU_16" to="Abfahrt1" fromLane="1" toLane="1" dir="s" state="M"/>
+    <connection from=":MU_18" to="HochfahrtMitte" fromLane="0" toLane="1" dir="l" state="M"/>
+    <connection from=":MU_19" to="Zufahrt2" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":RM_0" to="RechtsLinks" fromLane="0" toLane="0" dir="r" state="M"/>
+    <connection from=":RM_0" to="RechtsLinks" fromLane="1" toLane="1" dir="r" state="M"/>
+    <connection from=":RM_2" to="HochfahrtRechts" fromLane="0" toLane="0" dir="l" state="M"/>
+    <connection from=":RM_2" to="HochfahrtRechts" fromLane="1" toLane="1" dir="l" state="M"/>
+    <connection from=":RO_0" to="RunterfahrtRechts" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":RU_0" to="Zufahrt1" fromLane="0" toLane="1" dir="t" state="M"/>
+    <connection from=":UU_0" to="Zufahrt3" fromLane="0" toLane="1" dir="t" state="M"/>
+
+</net>

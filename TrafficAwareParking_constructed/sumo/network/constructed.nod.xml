@@ -1,0 +1,12 @@
+<nodes>
+    <node id="LU" x="0" y="0"/>
+    <node id="MU" x="300" y="0"/>
+    <node id="UU" x="300" y="-300"/>
+    <node id="RU" x="600" y="0"/>
+    <node id="LM" x="150" y="300"/>
+    <node id="MM" x="300" y="300"/>
+    <node id="RM" x="600" y="300"/>
+    <node id="LO" x="0" y="550"/>
+    <node id="MO" x="300" y="600"/>
+    <node id="RO" x="600" y="550"/>
+</nodes>

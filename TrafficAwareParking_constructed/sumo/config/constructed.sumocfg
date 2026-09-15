@@ -1,0 +1,17 @@
+<configuration>
+    <input>
+        <net-file value="../network/constructed.net.xml"/>
+        <route-files value="../routes/test.rout.xml"/>
+        <additional-files value="../parking/constructed.add.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="2000"/>
+    </time>
+    <processing>
+        <time-to-teleport value="-1"/>
+    </processing>
+    <output>
+        <tripinfo-output value="../output/tripinfo.xml"/>
+    </output>
+</configuration>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <!-- Keine Parking Stops: die Parkplatzwahl und Parkdauer
+         werden vollständig per Python/TraCI gesetzt. -->
+
+    <vType
+        id="car"
+        accel="2.6"
+        decel="4.5"
+        sigma="0.5"
+        length="5"
+        minGap="2.5"
+        maxSpeed="13.89"/>
+
+    <route id="entry_east" edges="Zufahrt1"/>
+    <route id="entry_north" edges="Zufahrt3"/>
+    <route
+    id="störverkehr_route"
+    edges="Zufahrt4 RunterfahrttMitte RunterRunter"/>
+
+    <flow
+        id="normal_east"
+        type="car"
+        route="entry_east"
+        begin="0"
+        end="3600"
+        vehsPerHour="200"/>
+
+    <flow
+        id="normal_north"
+        type="car"
+        route="entry_north"
+        begin="0"
+        end="3600"
+        vehsPerHour="200"/>
+    <flow
+    id="Störverkehr"
+    type="car"
+    route="störverkehr_route"
+    begin="0"
+    end="3600"
+    vehsPerHour="600"/>
+</routes>
