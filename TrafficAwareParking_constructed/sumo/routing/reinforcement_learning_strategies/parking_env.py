@@ -6,11 +6,11 @@ import traci
 
 class ParkingEnv(gym.Env):
 
-    # -----------------------------------------------------
-    # Grundeinstellungen
-    # -----------------------------------------------------
-
     metadata = {"render_modes": ["human"]}
+
+    # =====================================================
+    # SUMO / Szenario
+    # =====================================================
 
     SUMO_CONFIG = (
         r"C:\Users\User\Desktop\TrafficAwareParking_constructed_4parking"
@@ -19,16 +19,10 @@ class ParkingEnv(gym.Env):
 
     PARKING_AREAS = ["P1", "P2", "P3"]
 
-    PARKING_EDGES = {
-        "P1": "HochfahrtLinks",
-        "P2": "LinksLinks",
-        "P3": "HochfahrtRechts"
-    }
-
     PARKING_LANES = {
-    "P1": "HochfahrtLinks_0",
-    "P2": "LinksLinks_0",
-    "P3": "HochfahrtRechts_0"
+        "P1": "HochfahrtLinks_0",
+        "P2": "LinksLinks_0",
+        "P3": "HochfahrtRechts_0"
     }
 
     PARKING_CAPACITY = {
@@ -43,31 +37,43 @@ class ParkingEnv(gym.Env):
         "P3": 50
     }
 
-    # -----------------------------------------------------
+    # =====================================================
     # Initialisierung
-    # -----------------------------------------------------
+    # =====================================================
 
     def __init__(self):
 
         super().__init__()
 
-        # Drei mögliche Aktionen:
+        # -----------------------------------------------------
+        # Reward-Gewichte
+        # -----------------------------------------------------
+
+        self.W_DRIVE = 1.0
+        self.W_WAIT = 1.0
+        self.W_WALK = 1.0
+        self.W_FAILURE = 1.0
+
+        # -------------------------------------------------
+        # Action Space
         #
         # 0 -> P1
         # 1 -> P2
         # 2 -> P3
+        # -------------------------------------------------
 
         self.action_space = spaces.Discrete(3)
 
-        # State:
+        # -------------------------------------------------
+        # Observation Space
         #
-        # Für jeden Parkplatz:
-        #   Belegung
-        #   Routendistanz
-        #   Fahrzeit
-        #   Fußweg
+        # 3 Parkplätze * 4 Werte
         #
-        # 3 Parkplätze * 4 Werte = 12 Werte
+        # Belegung
+        # Entfernung
+        # Fahrzeit
+        # Fußweg
+        # -------------------------------------------------
 
         self.observation_space = spaces.Box(
             low=0.0,
@@ -76,51 +82,102 @@ class ParkingEnv(gym.Env):
             dtype=np.float32
         )
 
+        # -------------------------------------------------
+        # Fahrzeugverwaltung
+        # -------------------------------------------------
+
+        # Bereits bekannte Fahrzeuge
         self.known_vehicles = set()
+
+        # Fahrzeuge, die eine Entscheidung benötigen
+        self.decision_queue = []
+
+        # Fahrzeuge, für die bereits eine Entscheidung
+        # getroffen wurde, deren Ergebnis aber noch aussteht
+        self.pending_vehicles = {}
+
+        # Fahrzeug, das gerade vom Agenten behandelt wird
         self.current_vehicle = None
+
+        # Aktueller State
         self.current_state = None
 
-    # -----------------------------------------------------
-    # Neue Episode starten
-    # -----------------------------------------------------
+    # =====================================================
+    # Neue Episode
+    # =====================================================
 
     def reset(self, seed=None, options=None):
 
         super().reset(seed=seed)
 
-        # Alte TraCI-Verbindung schließen
+        # Alte SUMO-Verbindung schließen
         if traci.isLoaded():
             traci.close()
 
-        # SUMO neu starten
+        # SUMO starten
         traci.start([
             "sumo-gui",
             "-c", self.SUMO_CONFIG
         ])
 
+        # Variablen zurücksetzen
         self.known_vehicles = set()
+        self.decision_queue = []
+        self.pending_vehicles = {}
         self.current_vehicle = None
         self.current_state = None
 
-        # Zum ersten neuen Fahrzeug laufen
-        return self._get_next_vehicle_state()
+        # Bis zum ersten normalen Fahrzeug laufen
+        observation, _, info = self._advance_until_decision()
 
-    # -----------------------------------------------------
-    # Einen RL-Schritt ausführen
-    # -----------------------------------------------------
+        return observation, info
+
+    # =====================================================
+    # RL-Schritt
+    # =====================================================
 
     def step(self, action):
 
-        # Aus der Aktion den Parkplatz bestimmen
-        parking_area = self.PARKING_AREAS[int(action)]
+        # -------------------------------------------------
+        # 1. Aktuelles Fahrzeug holen
+        # -------------------------------------------------
+
+        if self.current_vehicle is None:
+            raise RuntimeError(
+                "Kein Fahrzeug für eine Aktion vorhanden."
+            )
 
         vehicle = self.current_vehicle
 
-        # Aktuelle Edge des Fahrzeugs
-        current_edge = traci.vehicle.getRoadID(vehicle)
+        # -------------------------------------------------
+        # 2. Aktion -> Parkplatz
+        # -------------------------------------------------
 
-        parking_lane = self.PARKING_LANES[parking_area]
-        parking_edge = traci.lane.getEdgeID(parking_lane)
+        parking_area = self.PARKING_AREAS[int(action)]
+
+        # -------------------------------------------------
+        # 3. Aktuelle Fahrzeugposition
+        # -------------------------------------------------
+
+        current_edge = traci.vehicle.getRoadID(
+            vehicle
+        )
+
+        # -------------------------------------------------
+        # 4. Parking Lane -> Parking Edge
+        # -------------------------------------------------
+
+        parking_lane = self.PARKING_LANES[
+            parking_area
+        ]
+
+        parking_edge = traci.lane.getEdgeID(
+            parking_lane
+        )
+
+        # -------------------------------------------------
+        # 5. Route berechnen
+        # -------------------------------------------------
 
         route = traci.simulation.findRoute(
             current_edge,
@@ -128,29 +185,39 @@ class ParkingEnv(gym.Env):
             vType="car"
         )
 
+        # -------------------------------------------------
+        # 6. Route nicht möglich
+        # -------------------------------------------------
 
-        # Sicherheitsprüfung
         if not route.edges:
 
             reward = -100.0
 
-            observation, info = self._get_next_vehicle_state()
+            self.current_vehicle = None
+
+            observation, info = self._advance_until_decision()
 
             return (
                 observation,
                 reward,
-                False,
+                info["simulation_finished"],
                 False,
                 info
             )
 
-        # Route setzen
+        # -------------------------------------------------
+        # 7. Route setzen
+        # -------------------------------------------------
+
         traci.vehicle.setRoute(
             vehicle,
             list(route.edges)
         )
 
-        # Parking Stop setzen
+        # -------------------------------------------------
+        # 8. Parking Stop setzen
+        # -------------------------------------------------
+
         traci.vehicle.setParkingAreaStop(
             vehicle,
             parking_area,
@@ -158,74 +225,215 @@ class ParkingEnv(gym.Env):
         )
 
         # -------------------------------------------------
-        # Vorläufiger Reward
-        # -------------------------------------------------
-        #
-        # WICHTIG:
-        # Dies ist zunächst nur ein funktionierender
-        # Prototyp. Die endgültige Reward-Funktion bauen
-        # wir erst nach dem Environment-Test.
+        # 9. Fahrzeug als "pending" speichern
         # -------------------------------------------------
 
-        travel_time = route.travelTime
-        walking_distance = self.WALKING_DISTANCE[parking_area]
+        self.pending_vehicles[vehicle] = {
 
-        reward = (
-            -(travel_time / 60.0)
-            -(walking_distance / 100.0)
+            "action": int(action),
+
+            "parking_area": parking_area,
+
+            "waiting_time": 0,
+
+            "start_time":
+                traci.simulation.getTime(),
+
+            "walking_distance":
+                self.WALKING_DISTANCE[parking_area],
+
+            "parking_failure": 0
+        }
+
+        # -------------------------------------------------
+        # 10. Aktuelles Fahrzeug ist entschieden
+        # -------------------------------------------------
+
+        self.current_vehicle = None
+
+        # -------------------------------------------------
+        # 11. Simulation weiterlaufen lassen,
+        #     bis das nächste Entscheidungsereignis
+        #     vorhanden ist.
+        # -------------------------------------------------
+
+        observation, reward, info = (
+            self._advance_until_decision()
         )
 
-        # Nächstes neues Fahrzeug suchen
-        observation, info = self._get_next_vehicle_state()
-
         terminated = info["simulation_finished"]
-
         truncated = False
 
         return (
             observation,
-            float(reward),
+            reward,
             terminated,
             truncated,
             info
         )
 
-    # -----------------------------------------------------
-    # Zum nächsten neuen Fahrzeug laufen
-    # -----------------------------------------------------
+    # =====================================================
+    # Simulation weiterführen
+    # =====================================================
 
-    def _get_next_vehicle_state(self):
+    def _advance_until_decision(self):
+
+        accumulated_reward = 0.0
 
         while True:
 
+            # -------------------------------------------------
+            # Einen SUMO-Schritt durchführen
+            # -------------------------------------------------
+
+            traci.simulationStep()
+
+            current_time = traci.simulation.getTime()
+
+            # -------------------------------------------------
             # Aktuelle Fahrzeuge
+            # -------------------------------------------------
+
             current_vehicles = set(
                 traci.vehicle.getIDList()
             )
 
-            # Noch nicht bekannte Fahrzeuge
+            # -------------------------------------------------
+            # Neue Fahrzeuge erkennen
+            # -------------------------------------------------
+
             new_vehicles = (
-                current_vehicles - self.known_vehicles
+                current_vehicles
+                - self.known_vehicles
             )
 
             # Störverkehr entfernen
-            new_vehicles = {
+            new_vehicles = [
                 vehicle
                 for vehicle in new_vehicles
                 if not vehicle.startswith("Störverkehr")
-            }
+            ]
+
+            # Neue Fahrzeuge in Entscheidungswarteschlange
+            for vehicle in new_vehicles:
+
+                if vehicle not in self.decision_queue:
+
+                    self.decision_queue.append(
+                        vehicle
+                    )
 
             # Bekannte Fahrzeuge aktualisieren
             self.known_vehicles.update(
                 current_vehicles
             )
 
-            # Gibt es ein neues normales Fahrzeug?
-            if new_vehicles:
+            # -------------------------------------------------
+            # Prüfen, ob pending Fahrzeuge fertig sind
+            # -------------------------------------------------
 
-                self.current_vehicle = sorted(
-                    new_vehicles
-                )[0]
+            completed_vehicles = []
+
+            for vehicle in list(
+                self.pending_vehicles.keys()
+                ):
+
+            # Fahrzeug ist noch in der Simulation
+                if vehicle in current_vehicles:
+
+                    speed = traci.vehicle.getSpeed(vehicle)
+
+                    if not traci.vehicle.isStoppedParking(vehicle):
+
+                        if speed < 0.1:
+                            self.pending_vehicles[vehicle]["waiting_time"] += 1.0
+
+
+
+                    parking_area = (
+                        self.pending_vehicles[vehicle]["parking_area"]
+                        )
+
+                    parking_lane = self.PARKING_LANES[parking_area]
+                    parking_edge = traci.lane.getEdgeID(parking_lane)
+
+                    current_edge = traci.vehicle.getRoadID(vehicle)
+
+                    # Fahrzeug ist an der Parkplatz-Edge angekommen
+                    if current_edge == parking_edge:
+
+                        occupied = traci.parkingarea.getVehicleCount(
+                            parking_area
+                            )
+
+                        capacity = self.PARKING_CAPACITY[
+                            parking_area
+                            ]
+
+                        # Parkplatz ist voll
+                        if occupied >= capacity:
+
+                            self.pending_vehicles[vehicle][
+                                "parking_failure"
+                                ] += 1
+
+                    # Aktuelle Parkinformation
+                    if traci.vehicle.isStoppedParking(vehicle):
+                        completed_vehicles.append(vehicle)
+
+            # -------------------------------------------------
+            # Vorläufige Rewards
+            #
+            # Noch kein endgültiger Reward!
+            # -------------------------------------------------
+
+            for vehicle in completed_vehicles:
+
+                data = self.pending_vehicles[vehicle]
+
+                current_time = traci.simulation.getTime()
+
+                travel_time = (
+                    current_time - data["start_time"]
+                )
+
+                waiting_time = data["waiting_time"]
+
+                walking_distance = data["walking_distance"]
+
+                parking_failure = data["parking_failure"]
+
+                print(
+                    f"Fahrzeug {vehicle} hat geparkt | "
+                    f"Fahrzeit: {travel_time:.2f} s | "
+                    f"Wartezeit: {waiting_time:.2f} s | "
+                    f"Weg Distanz: {walking_distance:.2f} s | "
+                    f"Parkfehler: {parking_failure:.2f} s | "
+                    f"Parkplatz: {data['parking_area']}"
+                )
+
+                # Nur Platzhalter
+                reward = self._calculate_reward(
+                    vehicle,
+                    data
+                )
+
+                accumulated_reward += reward
+
+                del self.pending_vehicles[
+                    vehicle
+                ]
+
+            # -------------------------------------------------
+            # Gibt es ein Fahrzeug, das jetzt
+            # entschieden werden muss?
+            # -------------------------------------------------
+
+            if self.decision_queue:
+
+                self.current_vehicle = (
+                    self.decision_queue.pop(0)
+                )
 
                 observation = self._build_observation(
                     self.current_vehicle
@@ -233,19 +441,22 @@ class ParkingEnv(gym.Env):
 
                 info = {
                     "vehicle": self.current_vehicle,
-                    "simulation_time": traci.simulation.getTime(),
+                    "simulation_time": current_time,
                     "simulation_finished": False
                 }
 
                 self.current_state = observation
 
-                return observation, info
+                return (
+                    observation,
+                    accumulated_reward,
+                    info
+                )
 
-            # Kein neues Fahrzeug:
-            # Simulation einen Schritt weiterführen
-            traci.simulationStep()
+            # -------------------------------------------------
+            # Simulation beendet?
+            # -------------------------------------------------
 
-            # Prüfen, ob Simulation beendet ist
             if traci.simulation.getMinExpectedNumber() <= 0:
 
                 observation = np.zeros(
@@ -255,15 +466,19 @@ class ParkingEnv(gym.Env):
 
                 info = {
                     "vehicle": None,
-                    "simulation_time": traci.simulation.getTime(),
+                    "simulation_time": current_time,
                     "simulation_finished": True
                 }
 
-                return observation, info
+                return (
+                    observation,
+                    accumulated_reward,
+                    info
+                )
 
-    # -----------------------------------------------------
+    # =====================================================
     # State erzeugen
-    # -----------------------------------------------------
+    # =====================================================
 
     def _build_observation(self, vehicle):
 
@@ -275,12 +490,14 @@ class ParkingEnv(gym.Env):
 
         for parking_area in self.PARKING_AREAS:
 
-            parking_lane = self.PARKING_LANES[parking_area]
-            parking_edge = traci.lane.getEdgeID(parking_lane)
+            # -------------------------------------------------
+            # Parking Area
+            # -------------------------------------------------
 
-            # Belegung
-            occupied = traci.parkingarea.getVehicleCount(
-                parking_area
+            occupied = (
+                traci.parkingarea.getVehicleCount(
+                    parking_area
+                )
             )
 
             capacity = self.PARKING_CAPACITY[
@@ -291,29 +508,54 @@ class ParkingEnv(gym.Env):
                 occupied / capacity
             )
 
-            # Route berechnen
+            # -------------------------------------------------
+            # Parking Lane -> Edge
+            # -------------------------------------------------
+
+            parking_lane = self.PARKING_LANES[
+                parking_area
+            ]
+
+            parking_edge = traci.lane.getEdgeID(
+                parking_lane
+            )
+
+            # -------------------------------------------------
+            # Route
+            # -------------------------------------------------
+
             route = traci.simulation.findRoute(
                 current_edge,
                 parking_edge,
                 vType="car"
             )
 
-            # Normalisierte Entfernung
+            # -------------------------------------------------
+            # Distanz
+            # -------------------------------------------------
+
             distance_normalized = min(
                 route.length / 1000.0,
                 1.0
             )
 
-            # Normalisierte Fahrzeit
+            # -------------------------------------------------
+            # Fahrzeit
+            # -------------------------------------------------
+
             travel_time_normalized = min(
                 route.travelTime / 300.0,
                 1.0
             )
 
-            # Normalisierte Gehstrecke
+            # -------------------------------------------------
+            # Fußweg
+            # -------------------------------------------------
+
             walking_normalized = min(
-                self.WALKING_DISTANCE[parking_area]
-                / 500.0,
+                self.WALKING_DISTANCE[
+                    parking_area
+                ] / 500.0,
                 1.0
             )
 
@@ -329,9 +571,143 @@ class ParkingEnv(gym.Env):
             dtype=np.float32
         )
 
-    # -----------------------------------------------------
-    # SUMO schließen
-    # -----------------------------------------------------
+    # =====================================================
+    # Reward
+    # =====================================================
+
+    def _calculate_reward(self, vehicle, data):
+
+        # -------------------------------------------------
+        # 1. Tatsächliche Fahrzeit
+        # -------------------------------------------------
+
+        current_time = traci.simulation.getTime()
+
+        travel_time = (
+            current_time - data["start_time"]
+        )
+
+
+        # -------------------------------------------------
+        # 2. Wartezeit
+        # -------------------------------------------------
+
+        waiting_time = data["waiting_time"]
+
+
+        # -------------------------------------------------
+        # 3. Fußweg
+        # -------------------------------------------------
+
+        walking_distance = data["walking_distance"]
+
+
+        # -------------------------------------------------
+        # 4. Parking Failure
+        # -------------------------------------------------
+
+        parking_failure = data["parking_failure"]
+
+
+        # -------------------------------------------------
+        # 5. Normalisierung
+        #
+        # Empirische Wertebereiche:
+        #
+        # Fahrzeit:   76 - 250 s
+        # Wartezeit:   0 - 150 s
+        # Fußweg:     50 - 300 m
+        #
+        # Parking Failure ist binär:
+        # 0 = kein Fehler
+        # 1 = Fehler
+        # -------------------------------------------------
+
+        drive_norm = (
+            (travel_time - 76.0)
+            / (250.0 - 76.0)
+        )
+
+        wait_norm = (
+            (waiting_time - 0.0)
+            / (150.0 - 0.0)
+        )
+
+        walk_norm = (
+            (walking_distance - 50.0)
+            / (300.0 - 50.0)
+        )
+
+        failure_norm = float(
+            parking_failure
+        )
+
+
+        # -------------------------------------------------
+        # 6. Werte auf [0, 1] begrenzen
+        # -------------------------------------------------
+
+        drive_norm = np.clip(
+            drive_norm,
+            0.0,
+            1.0
+        )
+
+        wait_norm = np.clip(
+            wait_norm,
+            0.0,
+            1.0
+        )
+
+        walk_norm = np.clip(
+            walk_norm,
+            0.0,
+            1.0
+        )
+
+
+        # -------------------------------------------------
+        # 7. Reward berechnen
+        # -------------------------------------------------
+
+        reward = (
+            -self.W_DRIVE * drive_norm
+            -self.W_WAIT * wait_norm
+            -self.W_WALK * walk_norm
+            -self.W_FAILURE * failure_norm
+        )
+
+
+        # -------------------------------------------------
+        # 8. Zum Test ausgeben
+        # -------------------------------------------------
+
+        print(
+            f"Reward für {vehicle} | "
+            f"Fahrzeit: {travel_time:.2f} s | "
+            f"Wartezeit: {waiting_time:.2f} s | "
+            f"Fußweg: {walking_distance:.2f} m | "
+            f"Parking Failure: {parking_failure} | "
+            f"Reward: {reward:.4f}"
+        )
+
+
+        return float(reward)
+
+            # -------------------------------------------------
+            # VORLÄUFIG
+            #
+            # Hier kommt später unsere echte Reward-Funktion:
+            #
+            # Driving Time
+            # Waiting Time
+            # Walking Distance
+            # Parking Failure
+            # -------------------------------------------------
+
+        # =====================================================
+        # Umgebung schließen
+        # =====================================================
 
     def close(self):
 

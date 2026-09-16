@@ -1,53 +1,49 @@
 from parking_env import ParkingEnv
 
 
-# Environment erzeugen
 env = ParkingEnv()
 
-
 # ---------------------------------------------------------
-# Episode starten
+# Environment starten
 # ---------------------------------------------------------
 
 observation, info = env.reset()
 
 print("Environment gestartet.")
-
-print("Initial State:")
+print("Erstes Fahrzeug:", info["vehicle"])
+print("Simulationzeit:", info["simulation_time"])
+print("State:")
 print(observation)
 
-print("Info:")
-print(info)
-
 
 # ---------------------------------------------------------
-# Testaktion ausführen
+# Mehrere RL-Schritte testen
 # ---------------------------------------------------------
 
-# 0 = P1
-# 1 = P2
-# 2 = P3
+for i in range(2000):
 
-action = 1
+    # Zum Test immer abwechselnd P1, P2, P3
+    action = i%3
 
-new_observation, reward, terminated, truncated, info = env.step(action)
+    print("\n-----------------------------")
+    print(f"RL-Schritt {i + 1}")
+    print(f"Aktion: {action} "
+          f"(0=P1, 1=P2, 2=P3)")
+
+    observation, reward, terminated, truncated, info = env.step(
+        action
+    )
+
+    print("Fahrzeug:", info["vehicle"])
+    print("Simulationzeit:", info["simulation_time"])
+    print("Reward:", reward)
+    print("State:", observation)
+
+    if terminated or truncated:
+        print("Simulation beendet.")
+        break
 
 
-# ---------------------------------------------------------
-# Ergebnisse ausgeben
-# ---------------------------------------------------------
-
-print("\nAktion:")
-print(action)
-
-print("\nReward:")
-print(reward)
-
-print("\nNeuer State:")
-print(new_observation)
-
-print("\nInfo:")
-print(info)
-
-print("\nSimulation beendet.")
 env.close()
+
+print("\nTest abgeschlossen.")
