@@ -23,7 +23,7 @@ print(observation)
 for i in range(2000):
 
     # Zum Test immer abwechselnd P1, P2, P3
-    action = i%3
+    action = 1
 
     print("\n-----------------------------")
     print(f"RL-Schritt {i + 1}")
