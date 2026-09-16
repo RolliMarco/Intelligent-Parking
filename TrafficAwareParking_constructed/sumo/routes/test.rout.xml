@@ -23,7 +23,7 @@
         type="car"
         route="entry_east"
         begin="0"
-        end="3600"
+        end="1000"
         vehsPerHour="200"/>
 
     <flow
@@ -31,13 +31,13 @@
         type="car"
         route="entry_north"
         begin="0"
-        end="3600"
+        end="1000"
         vehsPerHour="200"/>
     <flow
     id="Störverkehr"
     type="car"
     route="störverkehr_route"
     begin="0"
-    end="3600"
+    end="2000"
     vehsPerHour="600"/>
 </routes>
