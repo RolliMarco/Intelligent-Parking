@@ -1,4 +1,4 @@
-from parking_env import ParkingEnv
+from TrafficAwareParking_constructed.sumo.routing.reinforcement_learning_strategies.parking_enviroment.parking_env import ParkingEnv
 
 
 # =========================================================

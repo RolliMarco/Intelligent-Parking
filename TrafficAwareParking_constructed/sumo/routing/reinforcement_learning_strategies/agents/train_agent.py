@@ -1,4 +1,4 @@
-from parking_env import ParkingEnv
+from TrafficAwareParking_constructed.sumo.routing.reinforcement_learning_strategies.parking_enviroment.parking_env import ParkingEnv
 
 from stable_baselines3 import DQN
 from stable_baselines3.common.callbacks import BaseCallback
@@ -8,9 +8,9 @@ from stable_baselines3.common.callbacks import BaseCallback
 # Einstellungen
 # =========================================================
 
-NUM_EPISODES = 10
+NUM_EPISODES = 1000
 
-MODEL_PATH = "dqn_parking_10_episodes"
+MODEL_PATH = "dqn_parking_1000_episodes"
 
 
 # =========================================================
@@ -46,7 +46,7 @@ class StopAfterEpisodesCallback(BaseCallback):
                 if self.episode_count >= self.max_episodes:
 
                     print(
-                        "\n10 Episoden erreicht. "
+                        "\n1000 Episoden erreicht. "
                         "Training wird beendet."
                     )
 

@@ -51,8 +51,8 @@ class ParkingEnv(gym.Env):
 
         self.W_DRIVE = 1.0
         self.W_WAIT = 1.0
-        self.W_WALK = 1.0
-        self.W_FAILURE = 1.0
+        self.W_WALK = 0.1
+        self.W_FAILURE = 10.0
 
         # -------------------------------------------------
         # Action Space
@@ -116,7 +116,7 @@ class ParkingEnv(gym.Env):
 
         # SUMO starten
         traci.start([
-            "sumo-gui",
+            "sumo",
             "-c", self.SUMO_CONFIG
         ])
 
@@ -260,6 +260,10 @@ class ParkingEnv(gym.Env):
         observation, reward, info = (
             self._advance_until_decision()
         )
+
+        print(
+            f"STEP-REWARD: {reward:.4f}"
+            )
 
         terminated = info["simulation_finished"]
         truncated = False
@@ -418,6 +422,10 @@ class ParkingEnv(gym.Env):
                     data
                 )
 
+                print(
+                    f"Fahrzeug-Reward: {reward:.4f}"
+                    )
+
                 accumulated_reward += reward
 
                 del self.pending_vehicles[
@@ -570,140 +578,6 @@ class ParkingEnv(gym.Env):
             observation,
             dtype=np.float32
         )
-
-    # =====================================================
-    # Reward
-    # =====================================================
-
-    def _calculate_reward(self, vehicle, data):
-
-        # -------------------------------------------------
-        # 1. Tatsächliche Fahrzeit
-        # -------------------------------------------------
-
-        current_time = traci.simulation.getTime()
-
-        travel_time = (
-            current_time - data["start_time"]
-        )
-
-
-        # -------------------------------------------------
-        # 2. Wartezeit
-        # -------------------------------------------------
-
-        waiting_time = data["waiting_time"]
-
-
-        # -------------------------------------------------
-        # 3. Fußweg
-        # -------------------------------------------------
-
-        walking_distance = data["walking_distance"]
-
-
-        # -------------------------------------------------
-        # 4. Parking Failure
-        # -------------------------------------------------
-
-        parking_failure = data["parking_failure"]
-
-
-        # -------------------------------------------------
-        # 5. Normalisierung
-        #
-        # Empirische Wertebereiche:
-        #
-        # Fahrzeit:   76 - 250 s
-        # Wartezeit:   0 - 150 s
-        # Fußweg:     50 - 300 m
-        #
-        # Parking Failure ist binär:
-        # 0 = kein Fehler
-        # 1 = Fehler
-        # -------------------------------------------------
-
-        drive_norm = (
-            (travel_time - 76.0)
-            / (250.0 - 76.0)
-        )
-
-        wait_norm = (
-            (waiting_time - 0.0)
-            / (150.0 - 0.0)
-        )
-
-        walk_norm = (
-            (walking_distance - 50.0)
-            / (300.0 - 50.0)
-        )
-
-        failure_norm = float(
-            parking_failure
-        )
-
-
-        # -------------------------------------------------
-        # 6. Werte auf [0, 1] begrenzen
-        # -------------------------------------------------
-
-        drive_norm = np.clip(
-            drive_norm,
-            0.0,
-            1.0
-        )
-
-        wait_norm = np.clip(
-            wait_norm,
-            0.0,
-            1.0
-        )
-
-        walk_norm = np.clip(
-            walk_norm,
-            0.0,
-            1.0
-        )
-
-
-        # -------------------------------------------------
-        # 7. Reward berechnen
-        # -------------------------------------------------
-
-        reward = (
-            -self.W_DRIVE * drive_norm
-            -self.W_WAIT * wait_norm
-            -self.W_WALK * walk_norm
-            -self.W_FAILURE * failure_norm
-        )
-
-
-        # -------------------------------------------------
-        # 8. Zum Test ausgeben
-        # -------------------------------------------------
-
-        print(
-            f"Reward für {vehicle} | "
-            f"Fahrzeit: {travel_time:.2f} s | "
-            f"Wartezeit: {waiting_time:.2f} s | "
-            f"Fußweg: {walking_distance:.2f} m | "
-            f"Parking Failure: {parking_failure} | "
-            f"Reward: {reward:.4f}"
-        )
-
-
-        return float(reward)
-
-            # -------------------------------------------------
-            # VORLÄUFIG
-            #
-            # Hier kommt später unsere echte Reward-Funktion:
-            #
-            # Driving Time
-            # Waiting Time
-            # Walking Distance
-            # Parking Failure
-            # -------------------------------------------------
 
         # =====================================================
         # Umgebung schließen
