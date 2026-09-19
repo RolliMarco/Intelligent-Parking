@@ -56,10 +56,6 @@ class ParkingEnv(gym.Env):
 
         # -------------------------------------------------
         # Action Space
-        #
-        # 0 -> P1
-        # 1 -> P2
-        # 2 -> P3
         # -------------------------------------------------
 
         self.action_space = spaces.Discrete(3)
@@ -114,18 +110,18 @@ class ParkingEnv(gym.Env):
         if traci.isLoaded():
             traci.close()
 
-        # SUMO starten
-        traci.start([
-            "sumo",
-            "-c", self.SUMO_CONFIG
-        ])
-
         # Variablen zurücksetzen
         self.known_vehicles = set()
         self.decision_queue = []
         self.pending_vehicles = {}
         self.current_vehicle = None
         self.current_state = None
+
+        # SUMO starten
+        traci.start([
+            "sumo",
+            "-c", self.SUMO_CONFIG
+        ])
 
         # Bis zum ersten normalen Fahrzeug laufen
         observation, _, info = self._advance_until_decision()
@@ -186,27 +182,7 @@ class ParkingEnv(gym.Env):
         )
 
         # -------------------------------------------------
-        # 6. Route nicht möglich
-        # -------------------------------------------------
-
-        if not route.edges:
-
-            reward = -100.0
-
-            self.current_vehicle = None
-
-            observation, info = self._advance_until_decision()
-
-            return (
-                observation,
-                reward,
-                info["simulation_finished"],
-                False,
-                info
-            )
-
-        # -------------------------------------------------
-        # 7. Route setzen
+        # 6. Route setzen
         # -------------------------------------------------
 
         traci.vehicle.setRoute(
@@ -215,7 +191,7 @@ class ParkingEnv(gym.Env):
         )
 
         # -------------------------------------------------
-        # 8. Parking Stop setzen
+        # 7. Parking Stop setzen
         # -------------------------------------------------
 
         traci.vehicle.setParkingAreaStop(
@@ -352,8 +328,6 @@ class ParkingEnv(gym.Env):
                         if speed < 0.1:
                             self.pending_vehicles[vehicle]["waiting_time"] += 1.0
 
-
-
                     parking_area = (
                         self.pending_vehicles[vehicle]["parking_area"]
                         )
@@ -461,29 +435,6 @@ class ParkingEnv(gym.Env):
                     info
                 )
 
-            # -------------------------------------------------
-            # Simulation beendet?
-            # -------------------------------------------------
-
-            if traci.simulation.getMinExpectedNumber() <= 0:
-
-                observation = np.zeros(
-                    self.observation_space.shape,
-                    dtype=np.float32
-                )
-
-                info = {
-                    "vehicle": None,
-                    "simulation_time": current_time,
-                    "simulation_finished": True
-                }
-
-                return (
-                    observation,
-                    accumulated_reward,
-                    info
-                )
-
     # =====================================================
     # State erzeugen
     # =====================================================
@@ -578,6 +529,30 @@ class ParkingEnv(gym.Env):
             observation,
             dtype=np.float32
         )
+
+
+        # -------------------------------------------------
+        # Simulation beendet?
+        # -------------------------------------------------
+
+        if traci.simulation.getMinExpectedNumber() <= 0:
+
+            observation = np.zeros(
+                self.observation_space.shape,
+                dtype=np.float32
+            )
+
+            info = {
+                "vehicle": None,
+                "simulation_time": current_time,
+                "simulation_finished": True
+            }
+
+            return (
+                observation,
+                accumulated_reward,
+                info
+            )
 
         # =====================================================
         # Umgebung schließen
