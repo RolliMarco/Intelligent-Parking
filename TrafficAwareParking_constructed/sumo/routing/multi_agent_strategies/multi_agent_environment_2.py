@@ -250,7 +250,15 @@ class ParkingMultiAgentEnv2(MultiAgentEnv):
     # =====================================================
 
     def step(self, action_dict):
+        print("\n----- ENV STEP -----")
+        print(
+            f"Simulation: "
+            f"{traci.simulation.getTime():.1f}s"
+        )
 
+        print(
+            f"Aktionen von RLlib: {action_dict}"
+        )
         # -------------------------------------------------
         # Falls die Episode bereits beendet wurde
         # -------------------------------------------------
@@ -297,7 +305,7 @@ class ParkingMultiAgentEnv2(MultiAgentEnv):
         vehicle = self.agent_to_vehicle[
             current_agent
         ]
-
+        print(vehicle, action)
         # -------------------------------------------------
         # Aktion auf Gültigkeit prüfen
         # -------------------------------------------------
@@ -700,6 +708,8 @@ class ParkingMultiAgentEnv2(MultiAgentEnv):
                         current_time
                     )
                 )
+
+                print(vehicle, reward)
 
                 rewards[agent] = reward
 

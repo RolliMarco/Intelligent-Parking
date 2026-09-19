@@ -2,7 +2,6 @@ import ray
 import numpy as np
 
 from ray.rllib.algorithms.dqn import DQNConfig
-from ray.rllib.env import PettingZooEnv
 from ray.tune.registry import register_env
 
 from multi_agent_environment_2 import ParkingMultiAgentEnv2
@@ -106,6 +105,12 @@ config = (
         num_steps_sampled_before_learning_starts=1000,
         lr=0.0005,
         target_network_update_freq=1000,
+        replay_buffer_config={
+            "type": "MultiAgentPrioritizedEpisodeReplayBuffer",
+            "capacity": 50_000,
+            "alpha": 0.6,
+            "beta": 0.4,
+    }
     )
 
     .multi_agent(
@@ -137,9 +142,13 @@ training_iteration = 0
 
 while episodes_completed < NUM_EPISODES:
 
+    print("\n===== REPLAY BUFFER CONFIG =====")
+    print(config.replay_buffer_config)
+
     result = algo.train()
 
     training_iteration += 1
+    print("Training iteration:", training_iteration)
 
     # -----------------------------------------------------
     # RLlib speichert diese Kennzahl je nach API-Version
